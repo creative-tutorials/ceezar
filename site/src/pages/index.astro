@@ -1,0 +1,49 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Separator } from "@/components/ui/separator";
+import "@/styles/globals.css";
+import Header from "@/components/sections/Header.astro";
+import HomeSection from "@/components/sections/HomeSection.astro";
+import Features from "@/components/sections/Features.astro";
+import Payment from "@/components/sections/Payment.astro";
+import FAQ from "@/components/sections/FAQ.astro";
+import Closeup from "@/components/sections/Closeup.astro";
+import Footer from "@/components/sections/Footer.astro";
+import Cover from "@/components/sections/Cover.astro";
+---
+
+<Layout title="Ceezar - The best way to earn from digital assets">
+  <main>
+    <!-- Header -->
+    <Header />
+    <!-- home section -->
+    <HomeSection />
+    <!-- features section -->
+    <Features />
+    <!-- sided payment section -->
+    <Payment />
+    <Separator className="w-full h-px bg-[#1f1f31]/50" />
+    <!-- FAQ section -->
+    <FAQ />
+    <!-- CloseUp Section -->
+    <Closeup />
+    <!-- footer -->
+    <Footer />
+  </main>
+  <!-- cover container -->
+  <Cover />
+</Layout>
+
+<script>
+  const menu = document.getElementById("menu");
+  const cover = document.getElementById("cover");
+  const close = document.getElementById("close");
+
+  menu?.addEventListener("click", () => {
+    cover?.classList.add("show");
+  });
+
+  close?.addEventListener("click", () => {
+    cover?.classList.remove("show");
+  });
+</script>

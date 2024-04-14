@@ -1,0 +1,58 @@
+---
+import Image from "astro/components/Image.astro";
+import { Button } from "../ui/button";
+import { Menu } from "lucide-react";
+---
+
+<header
+  class="absolute bg-[rgb(2,2,13)] top-0 w-full md:p-3 lg:p-3 p-3 md:px-20 lg:px-20"
+>
+  <div id="wrapper" class="flex items-center justify-between">
+    <div id="logo" class="flex items-center gap-2">
+      <Image
+        src={"/logo.png"}
+        alt="Ceezar logo"
+        width={40}
+        height={40}
+        loading={"eager"}
+        decoding="async"
+      />
+      <p class="text-white font-bold">Ceezar</p>
+    </div>
+    <div
+      id="links"
+      class="bg-[#20202b]/70 backdrop-blur p-3 px-10 fixed z-20 top-4 right-2/4 transform translate-x-2/4 rounded-md md:flex lg:flex hidden items-center gap-7 text-white"
+    >
+      <a
+        href="/products"
+        class="font-normal text-zinc-300 transition-all hover:text-white scale-100 hover:scale-110"
+        >Products</a
+      >
+      <a
+        href="/features"
+        class="font-normal text-zinc-300 transition-all hover:text-white scale-100 hover:scale-110"
+        >Features</a
+      >
+      <a
+        href="/blogs"
+        class="font-normal text-zinc-300 transition-all hover:text-white scale-100 hover:scale-110"
+        >Blogs</a
+      >
+      <a
+        href="/solutions"
+        class="font-normal text-zinc-300 transition-all hover:text-white scale-100 hover:scale-110"
+        >Solutions</a
+      >
+    </div>
+    <div id="head-button" class="hidden md:flex lg:flex">
+      <a href="https://tally.so/r/3EXQEX" target="_blank">
+        <Button className="bg-white text-black hover:bg-slate-100"
+          >Get Started</Button
+        >
+      </a>
+    </div>
+    <div id="menu" class="md:hidden lg:hidden flex">
+      <Menu className="text-white" />
+    </div>
+  </div>
+</header>

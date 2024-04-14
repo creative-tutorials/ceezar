@@ -1,0 +1,69 @@
+---
+import Image from "astro/components/Image.astro";
+---
+
+<footer
+  id="footer"
+  class="md:p-20 lg:p-20 p-10 border-t border-[#1f1f31] flex flex-col gap-10 bg-gradient-to-br from-[#02020d]"
+>
+  <div
+    id="breakers"
+    class="flex md:flex-row lg:flex-row flex-col md:items-center lg:items-center md:justify-between lg:justify-between md:gap-10 lg:gap-10 gap-7"
+  >
+    <div id="top" class="flex flex-col gap-5">
+      <div id="image_" class="flex items-center gap-3">
+        <Image
+          src={"/logo.png"}
+          alt="Ceezar logo"
+          width={50}
+          height={50}
+          loading={"lazy"}
+          decoding="async"
+        />
+        <p class="text-white font-semibold text-lg">Ceezar</p>
+      </div>
+      <hgroup>
+        <p class="text-white">&copy; 2023 Timi. All rights reserved.</p>
+      </hgroup>
+    </div>
+
+    <div id="links" class="flex items-center gap-5 text-white">
+      <a
+        href="mailto:info.techtimi@gmail.com"
+        aria-label="Email"
+        target="_blank"
+        title="Email"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="currentColor"
+            d="M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6zm3.519 0L12 11.671L18.481 6H5.52zM20 7.329l-7.341 6.424a1 1 0 0 1-1.318 0L4 7.329V18h16V7.329z"
+          ></path>
+        </svg>
+      </a>
+      <a
+        href="https://x.com/timi_networks"
+        target="_blank"
+        aria-label="Twitter"
+        title="Twitter"
+      >
+        <svg
+          aria-label="Twitter"
+          xmlns="http://www.w3.org/2000/svg"
+          width="30"
+          height="30"
+          viewBox="0 0 16 16"
+          ><path
+            fill="currentColor"
+            d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07l-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z"
+          ></path></svg
+        >
+      </a>
+    </div>
+  </div>
+</footer>

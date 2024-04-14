@@ -1,0 +1,77 @@
+---
+import { Button } from "../ui/button";
+import { Separator } from "../ui/separator";
+import { Analytics } from "@/components/icons/analytics";
+import { StacksRounded } from "@/components/icons/stacks";
+import { Comment } from "@/components/icons/comment";
+---
+
+<section
+  id="home"
+  class="flex flex-col gap-10 items-center justify-center min-h-screen p-6 mt-10"
+>
+  <hgroup class="flex items-center flex-col gap-10 text-center">
+    <h1
+      class="md:text-7xl lg:text-7xl text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50"
+    >
+      Turn your creations into <br class="hidden md:block lg:block" />
+      <span class="">revenue streams</span>
+    </h1>
+    <p class="text-zinc-300 font-normal md:text-base lg:text-base text-sm">
+      Join a limited group of creators unlocking exclusive ways to sell and
+      profit <br class="hidden md:block" /> from their digital work. Sign up for
+      early access today!
+    </p>
+  </hgroup>
+  <div id="button" class="w-full max-w-xs">
+    <a href="https://tally.so/r/3EXQEX" target="_blank">
+      <Button
+        className="w-full p-6 bg-indigo-500 hover:bg-indigo-600 text-lg group"
+      >
+        <span class="transition-all duration-200 group-hover:scale-110"
+          >Get Started</span
+        >
+      </Button>
+    </a>
+  </div>
+  <Separator className="w-full max-w-lg h-px bg-[#1f1f31]/50" />
+  <div
+    id="separator-grid"
+    class="w-full max-w-lg grid md:grid-cols-3 lg:grid-cols-3 grid-cols-2 gap-4"
+  >
+    <div id="grid-bx" class="flex flex-col gap-3">
+      <div id="icon-grid">
+        <Analytics />
+      </div>
+      <hgroup class="flex flex-col gap-2">
+        <h6 class="text-white">Product Analytics</h6>
+        <p class="text-gray-300 text-xs">
+          Get an overview of how your products are performing.
+        </p>
+      </hgroup>
+    </div>
+    <div id="grid-bx" class="flex flex-col gap-3">
+      <div id="icon-grid">
+        <StacksRounded />
+      </div>
+      <hgroup class="flex flex-col gap-2">
+        <h6 class="text-white">Easy Setup</h6>
+        <p class="text-gray-300 text-xs">
+          Setting up your store is as easy as saying hello.
+        </p>
+      </hgroup>
+    </div>
+    <div id="grid-bx" class="flex flex-col gap-3">
+      <div id="icon-grid">
+        <Comment />
+      </div>
+      <hgroup class="flex flex-col gap-2">
+        <h6 class="text-white">We listen</h6>
+        <p class="text-gray-300 text-xs">
+          We listen to your feedback and suggestions.
+        </p>
+      </hgroup>
+    </div>
+  </div>
+  <Separator className="w-full max-w-lg h-px bg-[#1f1f31]/50" />
+</section>

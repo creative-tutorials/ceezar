@@ -1,0 +1,42 @@
+---
+import Image from "astro/components/Image.astro";
+---
+
+<section class="bg-[rgb(2,2,13)] md:p-10 lg:p-10 p-5 flex flex-col gap-10">
+  <div id="flip-sc" class="flex flex-col gap-10 items-center">
+    <div id="content-to" class="flex flex-col gap-5">
+      <hgroup class="flex flex-col gap-7">
+        <h2
+          class="text-transparent bg-clip-text bg-gradient-to-b from-neutral-50 to-neutral-400 md:text-6xl lg:text-6xl text-3xl text-center font-medium"
+        >
+          Secure Payments with <br />
+          <span class="text-indigo-400">Lemon Squeezy</span>
+        </h2>
+      </hgroup>
+    </div>
+    <div id="image" class="w-auto">
+      <Image
+        src="/lemonsqueezy.png"
+        alt="A bird."
+        width="500"
+        height="500"
+        loading={"lazy"}
+        decoding="async"
+        class={"rounded-lg w-full md:max-w-7xl lg:max-w-7xl h-auto"}
+      />
+    </div>
+    <div>
+      <hgroup>
+        <p
+          class="text-transparent bg-clip-text bg-gradient-to-r from-[#ceced1] to-white md:text-3xl lg:text-3xl text-sm text-center font-medium"
+        >
+          Enjoy peace of mind when making purchases. We've integrated with Lemon
+          Squeezy, <br class="hidden md:block lg:block" /> a well-established payment
+          processor, to ensure your transactions <br
+            class="hidden md:block lg:block"
+          /> are secure and your data is protected.
+        </p>
+      </hgroup>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,50 @@
+---
+import { X } from "lucide-react";
+---
+
+<div
+  id="cover"
+  class="fixed z-20 transition-all duration-300 opacity-0 pointer-events-none top-[-100%] left-0 bg-[#02020d] w-full h-full flex flex-col"
+>
+  <div id="close" class="p-5 flex items-end justify-end">
+    <X className="text-white w-8 h-8" />
+  </div>
+  <div id="cover-container" class="flex gap-6 p-8">
+    <div id="link-a" class="flex flex-col gap-5">
+      <a
+        href="/products"
+        class="font-normal text-xl text-zinc-300 transition-all hover:text-white scale-100 hover:scale-110"
+        >Products</a
+      >
+      <a
+        href="/features"
+        class="font-normal text-xl text-zinc-300 transition-all hover:text-white scale-100 hover:scale-110"
+        >Features</a
+      >
+      <a
+        href="/blogs"
+        class="font-normal text-xl text-zinc-300 transition-all hover:text-white scale-100 hover:scale-110"
+        >Blogs</a
+      >
+    </div>
+    <div id="link-b" class="flex flex-col gap-5">
+      <a
+        href="/solutions"
+        class="font-normal text-xl text-zinc-300 transition-all hover:text-white scale-100 hover:scale-110"
+        >Solutions</a
+      >
+    </div>
+  </div>
+  <div id="bottom-social" class="mt-auto p-8">
+    <span class="text-white">Twitter</span>
+    <span class="text-white">Mail</span>
+  </div>
+</div>
+
+<style>
+  #cover.show {
+    top: 0;
+    opacity: 1;
+    pointer-events: auto;
+  }
+</style>

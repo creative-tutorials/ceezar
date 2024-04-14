@@ -1,0 +1,62 @@
+---
+import { Accordion } from "@/components/Accordion";
+const accordionData = [
+  {
+    title: "What is Ceezar and what does it do?",
+    description:
+      "Ceezar is a platform designed to empower creators by providing them with tools and features to monetize their work. We offer a secure and user-friendly environment for creators to connect with their audience and sell their creations directly.",
+  },
+  {
+    title: "What types of creators can use Ceezar?",
+    description:
+      "Ceezar welcomes creators of all kinds! Whether you're a musician, artist, writer, developer, or any other type of creative professional, our platform can help you turn your passion into profit.",
+  },
+  {
+    title: "How can I earn money on Ceezar?",
+    description:
+      "You can earn money by selling your creations directly through our secure payment processing system  integrated with  Lemon Squeezy. This allows users to purchase your content (e.g., ebooks, music, tutorials) with ease.",
+  },
+  {
+    title: "How do I receive the money I earn on Ceezar?",
+    description:
+      "You can connect your preferred payment method (e.g., bank account, Paypal) to your  account to receive your earnings after a short processing period.",
+  },
+  {
+    title: "What are the fees associated with selling on Ceezar?",
+    description:
+      "Ceezar is committed to empowering creators by providing a fee-free platform to sell their work. We don't take any commission from your sales.  Transactions are handled securely through Lemon Squeezy, a trusted payment processor, and any fees associated with processing payments will be charged directly by Lemon Squeezy.",
+  },
+  {
+    title: "How does Ceezar make money then?",
+    description:
+      "We offer optional advertising services to help creators reach a wider audience and boost their sales. This allows you to promote your creations directly to potential customers within the platform.",
+  },
+  {
+    title: "Why is Ceezar currently in beta?",
+    description:
+      "We're currently in beta to ensure the platform is stable, user-friendly, and meets the needs of creators like you. This allows us to gather feedback and make refinements before a full launch.",
+  },
+  {
+    title: "How do I join the waitlist for Ceezar?",
+    description:
+      "Simply scroll up to the top of this page and click the 'Join Waitlist' button. Fill out the short form and you'll be notified when the platform is ready for early access.",
+  },
+  {
+    title: "Will I be notified when the beta launch happens?",
+    description:
+      "Yes, everyone who joins the waitlist will be notified via email when the beta launch begins and they can gain early access to the platform.",
+  },
+];
+---
+
+<section class="bg-[rgb(2,2,13)] md:p-10 lg:p-10 p-5 flex flex-col gap-10">
+  <hgroup class="flex flex-col gap-7 text-center">
+    <p class="text-indigo-400 font-bold text-sm">HAVE ANY QUESTIONS?</p>
+    <h3 class="text-white md:text-5xl lg:text-5xl text-4xl font-semibold">
+      Frequently Asked Questions
+    </h3>
+  </hgroup>
+  <div id="accordion-w">
+    <Accordion data={accordionData} client:idle />
+  </div>
+</section>

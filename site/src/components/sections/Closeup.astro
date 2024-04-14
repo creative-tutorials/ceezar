@@ -1,0 +1,44 @@
+---
+import Image from "astro/components/Image.astro";
+import { Button } from "../ui/button";
+---
+
+<section class="bg-[rgb(2,2,13)] md:p-10 lg:p-10 p-5 flex flex-col gap-10">
+  <div
+    id="section-container"
+    class="flex flex-col gap-10 items-center justify-center text-center"
+  >
+    <div id="logo-wrapper">
+      <Image
+        src={"/logo.png"}
+        alt="Ceezar logo"
+        width={120}
+        height={120}
+        loading={"lazy"}
+        decoding="async"
+      />
+    </div>
+    <hgroup>
+      <h3
+        class="md:text-6xl lg:text-6xl text-3xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#ceced1] to-white"
+      >
+        Sell your digital creations <br class="md:block lg:block hidden" /> easily
+        and securely with Ceezar.
+      </h3>
+    </hgroup>
+    <div id="btn-wrapper" class="flex flex-col gap-5">
+      <a href="https://tally.so/r/3EXQEX" target="_blank">
+        <Button
+          className="w-full p-6 bg-indigo-500 hover:bg-indigo-600 text-base group"
+        >
+          <span class="transition-all duration-200 group-hover:scale-105"
+            >Sign up for free</span
+          >
+        </Button>
+      </a>
+    </div>
+    <p class="text-gray-500 text-sm">
+      Be the first to know about our launch and exclusive offers.
+    </p>
+  </div>
+</section>
