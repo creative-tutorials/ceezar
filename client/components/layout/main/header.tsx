@@ -262,7 +262,9 @@ export default function Header() {
           </div>
         )}
       </header>
-      <ProfileComponent open={open} setOpen={setOpen} router={router} />
+      {isSignedIn && user && (
+        <ProfileComponent open={open} setOpen={setOpen} router={router} />
+      )}
     </>
   );
 }
@@ -291,7 +293,7 @@ function ProfileComponent(props: ProfileProps) {
         className="h-full overflow-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <UserProfile />
+        <UserProfile routing="hash" />
       </div>
     </section>
   );
