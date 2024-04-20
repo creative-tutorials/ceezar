@@ -24,7 +24,12 @@ import {
   DropdownMenuTrigger,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { CreditCard, Keyboard, LifeBuoy, LogOut, LogIn } from "lucide-react";
 import { Search, Settings, User, Menu, Github } from "lucide-react";
@@ -59,8 +64,24 @@ export default function Header() {
           </SheetTrigger>
           <SheetContent
             side={"left"}
-            className="bg-darkmid border-r border-zinc-900"
+            className="bg-darkmid border-r border-zinc-900 flex flex-col gap-5"
           >
+            <SheetHeader>
+              <div id="unknown-text" className="md:hidden lg:hidden block">
+                <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-1">
+                    <Image
+                      src="/logo.png"
+                      width={40}
+                      height={40}
+                      alt="ceezar [beta]"
+                    />
+                    <span className="font-semibold">Ceezar</span>
+                  </div>
+                  <sup className="text-xs font-semibold">[BETA]</sup>
+                </div>
+              </div>
+            </SheetHeader>
             <div id="links" className="flex flex-col gap-8">
               <div id="link favorite" className="flex flex-col gap-3">
                 <Link href="/" className={linkClass}>

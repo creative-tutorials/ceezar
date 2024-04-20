@@ -74,7 +74,7 @@ export default function Page() {
         <Suspense fallback={<div>Loading</div>}>
           <Sidebar />
         </Suspense>
-        <div className="w-full bg-transparent md:ml-64 lg:ml-64 mt-32 md:p-0 lg:p-0 p-4">
+        <div className="w-full bg-transparent md:ml-64 lg:ml-64 md:mt-32 lg:mt-32 mt-20 md:p-0 lg:p-0 p-4">
           <section className="w-full">
             <hgroup className="flex items-center gap-2 flex-col">
               <h1 className="text-2xl">Popular Stores</h1>
