@@ -1,16 +1,13 @@
 export default function CircularLoader() {
   return (
-    <section
-      id="load-page"
-      className="flex items-center justify-center min-h-screen"
-    >
+    <section id="load-page" className="">
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="130"
-        height="130"
+        width="100"
+        height="100"
         viewBox="0 0 24 24"
       >
-        <g fill="none" stroke="#6f4dff" strokeLinecap="round" strokeWidth="2">
+        <g fill="none" stroke="#393b48" strokeLinecap="round" strokeWidth="1">
           <path
             strokeDasharray="60"
             strokeDashoffset="60"

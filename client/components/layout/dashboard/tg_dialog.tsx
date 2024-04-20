@@ -1,10 +1,11 @@
 import { CloudUpload } from "lucide-react";
 import { toast } from "sonner";
+import axios from "axios";
+import { env } from "@/env";
+import { useAuth, useUser } from "@clerk/nextjs";
 import { useQueryClient } from "@tanstack/react-query";
 import { useMutation } from "@tanstack/react-query";
 import { createUpload } from "@/functions/upload";
-import axios from "axios";
-import { useAuth, useUser } from "@clerk/nextjs";
 import { getAPIURL } from "@/hooks/apiUtils";
 import { TDialogProp } from "@/types/componentTypes";
 import { Button } from "@/components/ui/button";
@@ -57,7 +58,7 @@ export function TriggeredDialog(props: TDialogProp) {
         {
           headers: {
             "Content-Type": "application/json",
-            apikey: process.env.NEXT_PUBLIC_NODE_API_KEY,
+            apikey: env.NEXT_PUBLIC_NODE_API_KEY,
             userid: userId,
             email: user?.emailAddresses[0]?.emailAddress,
           },

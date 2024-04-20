@@ -1,15 +1,15 @@
 "use client";
 import { useSearchParams } from "next/navigation";
+import { env } from "@/env";
 import { useAuth, useUser } from "@clerk/nextjs";
 import axios from "axios";
 import { lazy, Suspense } from "react";
 import { getAPIURL } from "@/hooks/apiUtils";
-import { ErrorComponent } from "@/components/layout/main/error";
 const CircularLoader = lazy(
   () => import("@/components/layout/loaders/circular-loader")
 );
 const ProfileFormView = lazy(() => import("@/components/layout/profileView"));
-const Dashboard = lazy(() => import("@/components/layout/dashboard"));
+const Dashboard = lazy(() => import("@/components/layout/dashboard/dashboard"));
 import { useQuery } from "@tanstack/react-query";
 
 export default function Page() {
@@ -33,7 +33,7 @@ export default function Page() {
       const response = await axios.get(`${apiurl}/user/store`, {
         headers: {
           "Content-Type": "application/json",
-          apikey: process.env.NEXT_PUBLIC_NODE_API_KEY,
+          apikey: env.NEXT_PUBLIC_NODE_API_KEY,
           userid: userId,
           email: user?.emailAddresses[0]?.emailAddress,
         },
@@ -50,7 +50,11 @@ export default function Page() {
   }
 
   if (isPending) {
-    return <CircularLoader />;
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <CircularLoader />
+      </div>
+    );
   }
 
   if (isError) {
@@ -69,19 +73,6 @@ export default function Page() {
           <ProfileFormView message={error.message} />
         </Suspense>
       )}
-      {/* {!isPending && (
-        <div>
-          {data ? (
-            <Suspense fallback={<CircularLoader />}>
-              <Dashboard store={data} />
-            </Suspense>
-          ) : (
-            <Suspense fallback={<CircularLoader />}>
-              <ProfileFormView />
-            </Suspense>
-          )}
-        </div>
-      )} */}
     </main>
   );
 }

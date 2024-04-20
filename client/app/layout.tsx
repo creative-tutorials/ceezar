@@ -5,6 +5,8 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import "./globals.css";
 import { Provider } from "./provider";
+import { lazy } from "react";
+const Header = lazy(() => import("@/components/layout/main/header"));
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -51,13 +53,14 @@ export default function RootLayout({
         variables: {
           colorPrimary: "#7148FC",
           borderRadius: "0.375rem",
-          colorBackground: "#111111",
+          colorBackground: "#0b0b0b",
         },
       }}
     >
       <Provider>
         <html lang="en">
           <body className={inter.className}>
+            <Header />
             {children}
             <Toaster richColors />
           </body>

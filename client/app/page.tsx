@@ -2,28 +2,16 @@
 import { Fragment, Suspense, lazy } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { env } from "@/env";
 import { useAuth, useUser } from "@clerk/nextjs";
 import { getAPIURL } from "@/hooks/apiUtils";
 import Link from "next/link";
 import Image from "next/image";
-import { Input } from "@/components/ui/input";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { ErrorComponent } from "@/components/layout/main/error";
 const CircularLoader = lazy(
   () => import("@/components/layout/loaders/circular-loader")
 );
+const Sidebar = lazy(() => import("@/components/layout/main/sidebar"));
 import { Button } from "@/components/ui/button";
-import { Search } from "lucide-react";
-import Sidebar from "@/components/layout/sidebar";
-
-import { Separator } from "@/components/ui/separator";
 
 type Products = {
   productID: string;
@@ -60,7 +48,7 @@ export default function Page() {
       const response = await axios.get(`${apiurl}/products`, {
         headers: {
           "Content-Type": "application/json",
-          apikey: process.env.NEXT_PUBLIC_NODE_API_KEY,
+          apikey: env.NEXT_PUBLIC_NODE_API_KEY,
           userid: userId, // current user ID
           email: user?.emailAddresses[0]?.emailAddress,
         },
@@ -81,12 +69,12 @@ export default function Page() {
   }
 
   return (
-    <Fragment>
-      <Header />
-
-      <main className="h-screen flex">
-        <Sidebar />
-        <div className="w-full bg-transparent md:ml-64 lg:ml-64 mt-32">
+    <main>
+      <section className="h-screen flex">
+        <Suspense fallback={<div>Loading</div>}>
+          <Sidebar />
+        </Suspense>
+        <div className="w-full bg-transparent md:ml-64 lg:ml-64 mt-32 md:p-0 lg:p-0 p-4">
           <section className="w-full">
             <hgroup className="flex items-center gap-2 flex-col">
               <h1 className="text-2xl">Popular Stores</h1>
@@ -94,21 +82,25 @@ export default function Page() {
                 Find popluar stores that you may like.
               </p>
             </hgroup>
-            <div id="cards stores" className="flex items-center gap-3">
+            <div
+              id="cards stores"
+              className="grid md:grid-cols-3 lg:grid-cols-3 grid-cols-2 gap-4 mt-8 w-full"
+            >
               <div
                 id="card"
-                className="group p-6 bg-zinc-950 flex flex-col gap-3 shadow-lg border border-zinc-800 text-center rounded-lg"
+                className="group p-2 w-full bg-zinc-950 flex flex-col gap-3 shadow-lg border border-zinc-800 text-center rounded-lg"
               >
                 <div
                   id="img"
-                  className="w-full h-full rounded-full overflow-hidden"
+                  className="w-full h-full rounded-md overflow-hidden"
                 >
                   <Image
-                    src="/Vercel Lab.png"
-                    width={150}
-                    height={150}
+                    src="/acme logo.png"
+                    width={500}
+                    height={500}
+                    priority
                     alt="Picture of the author"
-                    className="rounded-full w-36 h-36 object-cover transition-all overflow-hidden group-hover:scale-110"
+                    className="rounded-md w-full h-full object-cover transition-all overflow-hidden group-hover:scale-110"
                   />
                 </div>
                 <hgroup>
@@ -121,12 +113,16 @@ export default function Page() {
           </section>
           <section className="mt-10 w-full border border-zinc-800 p-3">
             <hgroup className="flex items-center gap-2 flex-col mt-3 relative">
-              <h1 className="text-4xl font-semibold">Feeds</h1>
+              <h2 className="text-4xl font-semibold">Feeds</h2>
             </hgroup>
-            {isPending && <CircularLoader />}
+            {isPending && (
+              <div className="flex items-center justify-center mt-8">
+                <CircularLoader />
+              </div>
+            )}
             <div
               id="feeds popular"
-              className="grid grid-cols-2 gap-4 w-full h-full mt-10"
+              className="grid md:grid-cols-2 lg:grid-cols-2 grid-cols-1 gap-4 w-full h-full mt-10"
             >
               {!isPending && data && (
                 <Suspense fallback={<CircularLoader />}>
@@ -134,74 +130,19 @@ export default function Page() {
                 </Suspense>
               )}
             </div>
-            {!isPending && isError && <div>{error.message}</div>}
+            {!isPending && isError && (
+              <hgroup>
+                <h3 className="text-xl font-semibold text-center">
+                  Error: {error.message}
+                </h3>
+              </hgroup>
+            )}
           </section>
         </div>
-      </main>
-    </Fragment>
+      </section>
+    </main>
   );
 }
-
-function Header() {
-  return (
-    <header className="w-full fixed top-0 z-10 flex items-center justify-between bg-zinc-950/50 backdrop-blur-md border-b border-zinc-700 p-8 px-64">
-      <div id="unknown-text">
-        <h3 className="text-3xl">Home</h3>
-      </div>
-      <Dialog>
-        <DialogTrigger asChild>
-          <div id="input-wrapper" className="w-full max-w-md relative">
-            <Input
-              type="text"
-              placeholder="Search for products"
-              className="border border-zinc-800 bg-zinc-900"
-            />
-            <Search className="absolute top-2 right-4 w-5 h-5" />
-          </div>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px] bg-zinc-950/30 backdrop-blur border border-zinc-900">
-          <DialogHeader>
-            <DialogTitle>Search for products</DialogTitle>
-            <DialogDescription className="text-zinc-400 text-sm">
-              Lookup a product by name. Hit enter or click the search button to
-              bring up the results.
-            </DialogDescription>
-          </DialogHeader>
-          <Separator className="bg-zinc-800" />
-          <div id="input-wrapper" className="flex items-center gap-3">
-            <Input
-              type="text"
-              placeholder="Search for products"
-              className="border border-zinc-800 bg-zinc-950 p-5"
-            />
-            <Button className="bg-white text-black hover:bg-zinc-200">
-              Search
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
-    </header>
-  );
-}
-
-const shimmer = (w: number, h: number) => `
-<svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <defs>
-    <linearGradient id="g">
-      <stop stop-color="#333" offset="20%" />
-      <stop stop-color="#222" offset="50%" />
-      <stop stop-color="#333" offset="70%" />
-    </linearGradient>
-  </defs>
-  <rect width="${w}" height="${h}" fill="#333" />
-  <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
-  <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
-</svg>`;
-
-const toBase64 = (str: string) =>
-  typeof window === "undefined"
-    ? Buffer.from(str).toString("base64")
-    : window.btoa(str);
 
 function Feeds({ data }: { data: Products[] }) {
   return (
@@ -217,19 +158,19 @@ function Feeds({ data }: { data: Products[] }) {
           <div id="feed" className="w-full h-full" key={product.productID}>
             <div
               id="image-wrapper"
-              className="group relative overflow-hidden w-full h-full rounded-lg"
+              className="group relative overflow-hidden w-full h-auto rounded-lg"
             >
               <Image
                 src={product.imageURL}
-                width={900}
-                height={900}
+                width={500}
+                height={500}
                 alt={product.name}
-                className="w-full h-full rounded-lg relative transition-all duration-300 group-hover:scale-110"
-                priority={true}
-                placeholder="blur"
-                blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                  shimmer(900, 900)
-                )}`}
+                className="w-full h-auto rounded-lg relative transition-all duration-300 group-hover:scale-110"
+                priority
+                // placeholder="blur"
+                // blurDataURL={`data:image/svg+xml;base64,${toBase64(
+                //   shimmer(900, 900)
+                // )}`}
               />
               <div
                 id="card-slick"
@@ -237,19 +178,40 @@ function Feeds({ data }: { data: Products[] }) {
               >
                 <div className="flex justify-between">
                   <div className="flex flex-col gap-4">
-                    <hgroup>
-                      <h3 className="text-xl text-white">{product.name}</h3>
-                      <p className="text-sm text-gray-400">{description}</p>
+                    <hgroup className="flex flex-col gap-2">
+                      <h3
+                        className="md:text-xl lg:text-xl text-lg text-white"
+                        aria-label="Name"
+                      >
+                        {product.name}
+                      </h3>
+                      <p className="md:text-sm lg:text-sm text-xs text-gray-400">
+                        {description}
+                      </p>
                     </hgroup>
                     <div id="btn-f">
                       <Link href={product.checkout} target="_blank">
-                        <Button className="bg-indigo-500 hover:bg-indigo-600">
+                        <Button className="bg-indigo-500 hover:bg-indigo-600 flex items-center gap-2">
                           Buy Now
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-6 h-6"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z"
+                            />
+                          </svg>
                         </Button>
                       </Link>
                     </div>
                   </div>
-                  <span className="flex items-end justify-end font-bold text-3xl">
+                  <span className="flex items-end justify-end font-bold md:text-3xl lg:text-3xl text-2xl">
                     {formatted}
                   </span>
                 </div>

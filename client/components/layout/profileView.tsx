@@ -1,5 +1,6 @@
 import { lazy, useState } from "react";
 import axios from "axios";
+import { env } from "@/env";
 const BubbleLoader = lazy(() => import("./loaders/bubble-loader"));
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -43,7 +44,7 @@ export default function ProfileFormView(props: { message: string }) {
         {
           headers: {
             "Content-Type": "application/json",
-            apikey: process.env.NEXT_PUBLIC_NODE_API_KEY,
+            apikey: env.NEXT_PUBLIC_NODE_API_KEY,
             userid: userId,
             email: user?.emailAddresses[0]?.emailAddress,
           },
@@ -85,7 +86,7 @@ export default function ProfileFormView(props: { message: string }) {
   return (
     <section className="flex items-center justify-center flex-col text-center min-h-screen gap-6 md:p-0 lg:p-0 p-8">
       <div id="content" className="flex flex-col gap-4">
-        <hgroup className="flex flex-col gap-2">
+        <hgroup>
           <h3 className="text-2xl font-semibold">Error: {props.message}</h3>
         </hgroup>
         <Dialog>

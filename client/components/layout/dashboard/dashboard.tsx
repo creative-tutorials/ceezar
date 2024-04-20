@@ -1,17 +1,18 @@
 import Image from "next/image";
-import { toast } from "sonner";
-import { ProductData, formDataProp, ImageData } from "@/types/formProps";
-import { DashboardProps } from "@/types/componentTypes";
+import axios from "axios";
+import { env } from "@/env";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Suspense, lazy, useState, useRef } from "react";
 import { useCountryCodes } from "@/hooks/country-codes";
 import { getAPIURL } from "@/hooks/apiUtils";
-import axios from "axios";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuth, useUser } from "@clerk/nextjs";
 import { createUpload } from "@/functions/upload";
-const BubbleLoader = lazy(() => import("./loaders/bubble-loader"));
-const Sidebar = lazy(() => import("./sidebar"));
-import { ProductsTable } from "./tables/products";
+import { toast } from "sonner";
+import { ProductData, formDataProp, ImageData } from "@/types/formProps";
+import { DashboardProps } from "@/types/componentTypes";
+const BubbleLoader = lazy(() => import("../loaders/bubble-loader"));
+const Sidebar = lazy(() => import("../main/sidebar"));
+import { ProductsTable } from "../tables/products";
 import { Bolt, CloudUpload, Heart, Package2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -36,7 +37,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { TriggeredDialog } from "./dashboard/tg_dialog";
+import { TriggeredDialog } from "./tg_dialog";
 
 export default function Dashboard({ store }: DashboardProps) {
   const { isLoaded, isSignedIn, userId } = useAuth();
@@ -77,7 +78,7 @@ export default function Dashboard({ store }: DashboardProps) {
       const response = await axios.get(`${apiUrl}/user/products`, {
         headers: {
           "Content-Type": "application/json",
-          apikey: process.env.NEXT_PUBLIC_NODE_API_KEY,
+          apikey: env.NEXT_PUBLIC_NODE_API_KEY,
           userid: userId, // current user ID
           email: user?.emailAddresses[0]?.emailAddress,
         },
@@ -109,7 +110,7 @@ export default function Dashboard({ store }: DashboardProps) {
         {
           headers: {
             "Content-Type": "application/json",
-            apikey: process.env.NEXT_PUBLIC_NODE_API_KEY,
+            apikey: env.NEXT_PUBLIC_NODE_API_KEY,
             userid: userId,
             email: user?.emailAddresses[0]?.emailAddress,
           },
@@ -171,7 +172,7 @@ export default function Dashboard({ store }: DashboardProps) {
         {
           headers: {
             "Content-Type": "application/json",
-            apikey: process.env.NEXT_PUBLIC_NODE_API_KEY,
+            apikey: env.NEXT_PUBLIC_NODE_API_KEY,
             userid: userId,
             email: user?.emailAddresses[0]?.emailAddress,
           },
@@ -223,22 +224,24 @@ export default function Dashboard({ store }: DashboardProps) {
 
   if (isError) {
     console.error(error);
-    // return <div>Error: {error.message}</div>;
   }
 
   return (
     <section id="store-main" className="h-screen flex">
-      <Suspense fallback={<>Loading</>}>
+      <Suspense fallback={<div>Loading</div>}>
         <Sidebar />
       </Suspense>
-      <div id="-right" className="w-full bg-transparent md:ml-56 lg:ml-56">
+      <div
+        id="-right"
+        className="w-full bg-transparent md:ml-56 lg:ml-56 mt-24"
+      >
         <div
           id="card"
           className="mesh p-8 flex md:flex-row lg:flex-row flex-col md:items-end lg:items-end md:justify-between lg:justify-between md:gap-0 lg:gap-0 gap-3"
         >
           <div
             id="pf-wrapper"
-            className="flex md:flex-row lg:flex-row flex-col md:items-end lg:items-end gap-3"
+            className="flex md:flex-row lg:flex-row md:items-end lg:items-end gap-3"
           >
             <div
               id="profile"
@@ -248,21 +251,23 @@ export default function Dashboard({ store }: DashboardProps) {
                 src={store.imageURL}
                 width={150}
                 height={150}
-                className="rounded-md border-white p-1 md:w-52 lg:w-52 w-full h-52 object-cover"
+                className="rounded-md border-white p-1 md:w-52 lg:w-52 w-40 h-40 object-cover"
                 priority
                 alt={store.name}
               />
             </div>
             <hgroup className="flex flex-col gap-3">
-              <h2 className="text-3xl text-white font-medium">{store.name}</h2>
-              <div className="flex items-center gap-5 text-zinc-900 font-medium">
-                <p className="flex items-center gap-1 text-white">
+              <h2 className="md:text-3xl lg:text-3xl text-2xl text-white font-medium">
+                {store.name}
+              </h2>
+              <div className="flex md:flex-row lg:flex-row flex-col md:items-center lg:items-center gap-5 text-zinc-900 font-medium">
+                <p className="flex items-center gap-1 text-white md:text-base lg:text-base text-sm">
                   <span className="bg-[#bab7f4] p-1 rounded-full">
                     <Bolt className="text-[#181296]" />
                   </span>{" "}
                   {store.reputations} reputation
                 </p>
-                <p className="flex items-center gap-1 text-white">
+                <p className="flex items-center gap-1 text-white md:text-base lg:text-base text-sm">
                   <span className="bg-[#bab7f4] p-1 rounded-full">
                     <Heart className="text-[#181296]" />
                   </span>{" "}

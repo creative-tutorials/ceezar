@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import { lazy } from "react";
+const Header = lazy(() => import("@/components/layout/main/header"));
 
 export const metadata: Metadata = {
   title: "Store / Ceezar",
@@ -12,9 +11,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
-  );
+  return <section>{children}</section>;
 }

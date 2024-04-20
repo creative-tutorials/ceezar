@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 // import CircularLoader from './loaders/circular-loader';
-const CircularLoader = lazy(() => import("./loaders/circular-loader"));
+const CircularLoader = lazy(() => import("../loaders/circular-loader"));
 
 const linkClass =
   "flex items-center gap-4 bg-transparent transition-all hover:bg-darklink hover:text-zinc-200 hover:pl-4 p-[0.5rem] rounded-lg";
@@ -23,6 +23,7 @@ export default function Sidebar() {
       id="sidebar"
       className="fixed z-20 md:block lg:block hidden top-0 left-0 h-full p-10 px-4 w-full max-w-60 bg-darkmid border-r border-zinc-900 overflow-hidden"
     >
+      <div id="sidebar-logo"></div>
       <div id="links" className="flex flex-col gap-8">
         <div id="link favorite" className="flex flex-col gap-3">
           <Link href="/" className={linkClass}>

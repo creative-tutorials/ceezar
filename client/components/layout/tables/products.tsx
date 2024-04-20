@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import { env } from "@/env";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import {
   ColumnDef,
@@ -13,7 +15,6 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -70,7 +71,7 @@ export function ProductsTable({
       const response = await axios.delete(`${apiUrl}/user/products`, {
         headers: {
           "Content-Type": "application/json",
-          apikey: process.env.NEXT_PUBLIC_NODE_API_KEY,
+          apikey: env.NEXT_PUBLIC_NODE_API_KEY,
           userid: userId,
           email: email,
         },
