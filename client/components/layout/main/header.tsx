@@ -26,30 +26,21 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import { CreditCard, Keyboard, LifeBuoy, LogOut, LogIn } from "lucide-react";
+import { Search, Settings, User, Menu, Github } from "lucide-react";
 import {
-  CreditCard,
-  Keyboard,
-  LifeBuoy,
-  LogOut,
-  Search,
-  Settings,
-  User,
-  Menu,
-  Github,
   MousePointer2,
   Store,
   TextSelect,
   UserCheck,
   Compass,
-  Bookmark,
-  Rss,
 } from "lucide-react";
+import { Bookmark, Rss } from "lucide-react";
+import { linkClass } from "./linkClass";
 import { Separator } from "@/components/ui/separator";
 import { UserProfile } from "@clerk/nextjs";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
-const linkClass =
-  "flex items-center gap-4 bg-transparent transition-all hover:bg-darklink hover:text-zinc-200 hover:pl-4 p-[0.5rem] rounded-lg";
 export default function Header() {
   const { user } = useUser();
   const { isSignedIn } = useAuth();
@@ -59,7 +50,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="w-full fixed top-0 z-10 flex md:gap-0 lg:gap-0 gap-3 items-center justify-between bg-zinc-950/50 backdrop-blur-md border-b border-zinc-700 p-8 md:pl-64 lg:pl-64">
+      <header className="w-full fixed top-0 z-10 flex md:gap-0 lg:gap-0 gap-3 items-center justify-between bg-zinc-950/50 backdrop-blur-md border-b border-zinc-700 md:p-8 lg:p-8 p-4 md:pl-64 lg:pl-64">
         <Sheet>
           <SheetTrigger asChild>
             <div id="harmburger-menu" className="md:hidden lg:hidden block">
@@ -260,6 +251,14 @@ export default function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
+        )}
+        {!isSignedIn && (
+          <Button
+            className="bg-white hover:bg-zinc-200 text-black flex items-center gap-1"
+            onClick={() => router.push("/sign-in")}
+          >
+            Login <LogIn className="w-4 h-4" />
+          </Button>
         )}
       </header>
       {isSignedIn && user && (

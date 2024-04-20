@@ -233,7 +233,7 @@ export default function Dashboard({ store }: DashboardProps) {
       </Suspense>
       <div
         id="-right"
-        className="w-full bg-transparent md:ml-56 lg:ml-56 mt-24"
+        className="w-full bg-transparent md:ml-56 lg:ml-56 md:mt-24 lg:mt-24 mt-16"
       >
         <div
           id="card"

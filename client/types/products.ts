@@ -11,7 +11,7 @@ export type ProductInfo = {
 
 export type ProductsTableData = {
   products: ProductInfo[];
-  apiUrl: "http://localhost:8080" | "https://example.com";
+  apiUrl: "http://localhost:8080" | "https://ceezar-server.vercel.app";
   isLoaded: boolean;
   userId: string | null | undefined;
   editButtonRef?: React.RefObject<HTMLButtonElement>;
