@@ -37,7 +37,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { TriggeredDialog } from "./tg_dialog";
+import { TriggeredDialog } from "./triggered-dialog";
 
 export default function Dashboard({ store }: DashboardProps) {
   const { isLoaded, isSignedIn, userId } = useAuth();
@@ -233,7 +233,7 @@ export default function Dashboard({ store }: DashboardProps) {
       </Suspense>
       <div
         id="-right"
-        className="w-full bg-transparent md:ml-56 lg:ml-56 md:mt-24 lg:mt-24 mt-16"
+        className="w-full bg-transparent md:ml-56 lg:ml-56 md:mt-20 lg:mt-20 mt-16"
       >
         <div
           id="card"
@@ -241,18 +241,18 @@ export default function Dashboard({ store }: DashboardProps) {
         >
           <div
             id="pf-wrapper"
-            className="flex md:flex-row lg:flex-row md:items-end lg:items-end gap-3"
+            className="flex md:flex-row lg:flex-row md:items-end lg:items-end gap-3 w-full"
           >
             <div
               id="profile"
-              className="bg-neutral-900 border border-zinc-800 rounded-md shadow-md shadow-black/20"
+              className="bg-neutral-900 border border-zinc-800 w-auto h-auto rounded-md shadow-md shadow-black/20"
             >
               <Image
                 src={store.imageURL}
-                width={150}
-                height={150}
-                className="rounded-md border-white p-1 md:w-52 lg:w-52 w-40 h-40 object-cover"
-                priority
+                width={100}
+                height={100}
+                className="rounded-md p-1 md:w-48 lg:w-48 md:h-48 lg:h-48 w-auto h-auto object-cover"
+                priority={true}
                 alt={store.name}
               />
             </div>

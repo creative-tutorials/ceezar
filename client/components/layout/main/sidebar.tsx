@@ -12,16 +12,15 @@ import {
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { linkClass } from "./linkClass";
-const CircularLoader = lazy(() => import("../loaders/circular-loader"));
 
 export default function Sidebar() {
   return (
     <div
       id="sidebar"
-      className="fixed z-20 md:block lg:block hidden top-0 left-0 h-full p-10 px-4 w-full max-w-60 bg-darkmid border-r border-zinc-900 overflow-hidden"
+      className="fixed md:block lg:block hidden top-0 left-0 h-full p-10 px-4 w-full max-w-60 bg-darkmid border-r border-zinc-900 overflow-hidden"
     >
       <div id="sidebar-logo"></div>
-      <div id="links" className="flex flex-col gap-8">
+      <div id="links" className="flex flex-col gap-8 mt-12">
         <div id="link favorite" className="flex flex-col gap-3">
           <Link href="/" className={linkClass}>
             <TextSelect className="w-5 h-5" /> Feed

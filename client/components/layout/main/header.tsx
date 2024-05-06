@@ -55,7 +55,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="w-full fixed top-0 z-10 flex md:gap-0 lg:gap-0 gap-3 items-center justify-between bg-zinc-950/50 backdrop-blur-md border-b border-zinc-700 md:p-8 lg:p-8 p-4 md:pl-64 lg:pl-64">
+      <header className="w-full fixed top-0 z-10 flex md:gap-0 lg:gap-0 gap-3 items-center justify-between bg-zinc-950/50 backdrop-blur-md border-b border-zinc-700 p-4 md:pl-10 lg:pl-10">
         <Sheet>
           <SheetTrigger asChild>
             <div id="harmburger-menu" className="md:hidden lg:hidden block">
@@ -127,18 +127,21 @@ export default function Header() {
         </Sheet>
 
         <div id="unknown-text" className="md:block lg:block hidden">
-          <div className="flex items-center gap-1">
+          <Link href="/">
             <div className="flex items-center gap-1">
-              <Image
-                src="/logo.png"
-                width={50}
-                height={50}
-                alt="ceezar [beta]"
-              />
-              <span className="font-semibold">Ceezar</span>
+              <div className="flex items-center gap-1">
+                <Image
+                  src="/logo.png"
+                  width={50}
+                  height={50}
+                  alt="ceezar [beta]"
+                  priority={true}
+                />
+                <span className="font-semibold">Ceezar</span>
+              </div>
+              <sup className="text-xs font-semibold">[BETA]</sup>
             </div>
-            <sup className="text-xs font-semibold">[BETA]</sup>
-          </div>
+          </Link>
         </div>
         <Dialog>
           <DialogTrigger asChild>

@@ -1,8 +1,9 @@
 import { lazy, useState } from "react";
 import axios from "axios";
 import { env } from "@/env";
-const BubbleLoader = lazy(() => import("./loaders/bubble-loader"));
-import { Button } from "@/components/ui/button";
+import { useUser, useAuth } from "@clerk/nextjs";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { getAPIURL } from "@/hooks/apiUtils";
 import { toast } from "sonner";
 import {
   Dialog,
@@ -16,14 +17,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { useUser, useAuth } from "@clerk/nextjs";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+const BubbleLoader = lazy(() => import("../loaders/bubble-loader"));
+import { Button } from "@/components/ui/button";
 
 export default function ProfileFormView(props: { message: string }) {
   const { isLoaded, isSignedIn, userId } = useAuth();
   const { user } = useUser();
+  const apiUrl = getAPIURL();
   const queryClient = useQueryClient();
-
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -36,7 +37,7 @@ export default function ProfileFormView(props: { message: string }) {
     try {
       setIsDisabled(true);
       const response = await axios.post(
-        "http://localhost:8080/store",
+        `${apiUrl}/store`,
         {
           name: formData.name,
           description: formData.description,
